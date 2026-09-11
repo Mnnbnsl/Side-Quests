@@ -23,29 +23,29 @@ P — desired false-positive probability
 
 The approximate false-positive probability is:
 
-[
+$$
 P = \left(1-\left(1-\frac{1}{m}\right)^{kn}\right)^k
-]
+$$
 
 Here, 1/m is the probability of selecting a particular bit when hashing an element. Therefore,
 
-[
+$$
 \left(1-\frac{1}{m}\right)^{kn}
-]
+$$
 
 represents the probability that a particular bit remains unset after all n insertions using k hash functions.
 
 For a desired false-positive probability P, the required bit-array size can be approximated by:
 
-[
+$$
 m = \frac{-n\ln(P)}{(\ln 2)^2}
-]
+$$
 
 The optimal number of hash functions is:
 
-[
+$$
 k = \frac{m}{n}\ln 2
-]
+$$
 
 ## Hashing
 
@@ -53,9 +53,9 @@ The implementation uses MurmurHash3 as the underlying hash function.
 
 Instead of maintaining k completely independent hash functions, double hashing is used to generate the k positions:
 
-[
+$$
 h_i(x) = h_1(x) + i \cdot h_2(x)
-]
+$$
 
 The resulting hash values are mapped to positions in the bit array using modulo m.
 
