@@ -53,3 +53,59 @@ void insert(bitset<M> &bitarray, const string &s, int k, int m) {
     cout << s << " added.\n";
 }
 
+// Sample test to check if it works 
+int main() {
+    constexpr size_t M = 1000;
+    constexpr int K = 7;
+
+    bitset<M> bitarray;
+
+    // Insert some elements
+    vector<string> words = {
+        "apple",
+        "banana",
+        "orange",
+        "mango",
+        "grapes",
+        "watermelon",
+        "pineapple"
+    };
+
+    cout << "=== INSERTING ===\n";
+
+    for (const string& word : words) {
+        insert(bitarray, word, K, M);
+    }
+
+    cout << "\n=== LOOKUP ===\n";
+
+    // Elements that were inserted
+    for (const string& word : words) {
+        bool found = lookup(bitarray, word, K, M);
+
+        cout << word << " -> "
+             << (found ? "possibly present" : "definitely not present")
+             << '\n';
+    }
+
+    // Elements that were NOT inserted
+    vector<string> not_present = {
+        "peach",
+        "cherry",
+        "kiwi",
+        "papaya"
+    };
+
+    cout << "\n=== LOOKUP FOR NON-EXISTING ELEMENTS ===\n";
+
+    for (const string& word : not_present) {
+        bool found = lookup(bitarray, word, K, M);
+
+        cout << word << " -> "
+             << (found ? "possibly present (false positive)"
+                       : "definitely not present")
+             << '\n';
+    }
+
+    return 0;
+}
